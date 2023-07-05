@@ -1,0 +1,43 @@
+body {
+  font-family: 'Verdana';
+  margin: 0;
+}
+main {
+  margin: auto auto 0 auto;
+  width: 404px;
+  height: 650px;
+  padding: 2em 0;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 7px;
+}
+main > crown {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  grid-column: 1 / 3;
+  border: 2em solid #000;
+  border-radius: 100%;
+
+  width: 120px;
+  height: 120px;
+}
+main > img {
+  border: 2px solid #000;
+  grid-column: 1 / 3;
+}
+main > a {
+  display: block;
+  color: #FFF;
+  background-color: #000;
+  font-size: 18pt;
+  height: 1em;
+  line-height: 0.85em;
+  text-align: center;
+  text-decoration: none;
+}
+main > a:hover, main > a:active {
+  background-color: #2C2C2C;
+}
