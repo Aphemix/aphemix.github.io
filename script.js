@@ -6,6 +6,13 @@ if (currentURL.pathname == '/chats/') {
     .find(link => link.innerText == 'x');
 
   (lastLink) && (lastLink.innerText = 'Ride Off Into The Sunset / Directly Into The Future');
+
+  let dateCount = 1;
+  for (currentDate of document.querySelectorAll('td.date')) {
+    currentDate.innerText = `[${(dateCount + '').padStart(2, 0)}] ${currentDate.innerText}`;
+
+    dateCount++;
+  }
 }
 else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
   let hasHash = !!currentURL.hash;
