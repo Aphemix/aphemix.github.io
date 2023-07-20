@@ -67,8 +67,8 @@ else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
         `${(monthNames.indexOf(month) + 1 + '').padStart(2, 0)}-`,
         // next the number of the day, padded to a length of two digits, followed by the year,
         `${day.padStart(2, 0)}-${year}`,
-        // then a hyphen separating the date from the time of day,
-        ' - ',
+        // then an underscore separating the date from the time of day,
+        '_',
         // then the time of day converted to the desired 24h time with the conversion function
         `${to24HourTime(hour, minute, amPm)}`
       // finally, combine that list of rearranged elements into a single item
@@ -98,6 +98,7 @@ else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
 
     // if there is presently a hash in the URL matching the present item's date,
     if ((hasHash) && (currentURL.hash.endsWith(dateAnchor))) {
+      console.log(dateAnchor);
       // scroll to that date,
       currentDate.scrollIntoView();
       // and stop checking for further hashes
