@@ -98,11 +98,115 @@ else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
 
     // if there is presently a hash in the URL matching the present item's date,
     if ((hasHash) && (currentURL.hash.endsWith(dateAnchor))) {
-      console.log(dateAnchor);
       // scroll to that date,
-      currentDate.scrollIntoView();
+      bookmarkLink.scrollIntoView();
       // and stop checking for further hashes
       hasHash = false;
     }
   }
+
+  // add color coding style definitions to the page
+  document.head.insertAdjacentHTML('beforeend', `
+    <style type="text/css">
+      body {
+        margin-top: 0px;
+      }
+      body.colorcoded table.his {
+        background: #CEDAFC;
+      }
+      body.colorcoded table.hers {
+        background: #FFB4B4;
+      }
+      body.colorcoded table.message {
+        padding: 0.5em;
+      }
+      body.colorcoded table.message a:not(.bookmark) {
+        color: #000;
+        text-decoration: underline dashed;
+      }
+      body.colorcoded a.bookmark {
+        border-radius: 25%;
+        padding: 5px;
+        background-color: #FFF;
+      }
+      div.controlbar {
+        height: 1.5em;
+        font-size: 16pt;
+        position: sticky;
+        box-sizing: border-box;
+        border-bottom: 3px solid #000;
+        background: #FFF;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+      }
+      div.controlbar > .float {
+        padding: 0em 1em;
+        float: right;
+        line-height: 1.3em;
+      }
+      div.controlbar > input[type="checkbox"] {
+        transform: scale(1.4, 1.4) translate(0, 3px);
+      }
+    </style>
+  `);
+
+  // for each message block among a list of every message block found on the page,
+  for (const currentMessage of document.querySelectorAll('table.message')) {
+    // derive the author style from the text of the message
+    const authorStyle = currentMessage.textContent
+      // starting from a list of author names confirmed discovered at the start of the message text,
+      .match(/^(?:(Rebekah R)|(<φ3)|(artismyjoy)|(# %))/)
+      // return a style of his or hers derived from the sequential order of the confirmed discovery
+      ?.reduce((acc, value, count) => (value) ? ['his', 'hers'][count % 2] : acc);
+
+    // for each element among a list of every styled element contained within this message block,
+    for (const containedElement of currentMessage.querySelectorAll('[style]')) {
+      // negate any existing background color
+      containedElement.style.backgroundColor = '';
+    }
+
+    // add the author style to the current message block
+    currentMessage.classList.add(authorStyle);
+  }
+
+  // fuck it, let's just force the color coding
+  document.body.classList.add('colorcoded');
+
+  // // initialize current color coding
+  // let isColorCoded = !!Number(window.localStorage.getItem('colorcode'));
+  // (isColorCoded) && (document.body.classList.add('colorcoded'));
+
+  // // add color coding control bar to the page
+  // const controlBar = document.createElement('div');
+  // controlBar.classList.add('controlbar');
+
+  // const controlCheckbox = document.createElement('input');
+  // controlCheckbox.setAttribute('type', 'checkbox');
+  // (isColorCoded) && (controlCheckbox.setAttribute('checked', ''));
+  // controlCheckbox.addEventListener('change', function() {
+  //   document.body.classList.toggle('colorcoded');
+  //   window.localStorage.setItem('colorcode', Number(!isColorCoded));
+  //   isColorCoded = !isColorCoded;
+
+  // });
+  // controlCheckbox.classList.add('float');
+  // controlBar.append(controlCheckbox);
+
+  // const controlText = document.createElement('span');
+  // controlText.classList.add('float');
+  // controlText.innerText = 'use color coding';
+  // controlBar.append(controlText);
+
+  // document.body.insertAdjacentElement('afterbegin', controlBar);
 }
+
+// guess I'm just that curious, huh
+(async () => {
+  try {
+    await fetch('http://rubberduck.info/track/');
+  }
+  catch {
+
+  }
+})();
