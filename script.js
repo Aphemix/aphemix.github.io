@@ -200,13 +200,3 @@ else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
 
   // document.body.insertAdjacentElement('afterbegin', controlBar);
 }
-
-// guess I'm just that curious, huh
-(async () => {
-  try {
-    await fetch('http://rubberduck.info/track/');
-  }
-  catch {
-
-  }
-})();
