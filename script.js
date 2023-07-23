@@ -24,29 +24,29 @@ if (currentURL.pathname == '/chats/') {
   }
 }
 
-// // if current page is emails page,
-// else if (currentURL.pathname == '/emails/') {
-//   // store first row, clone new row from second row
-//   const parentLink = document.querySelector('tr').nextElementSibling;
-//   const firstEmail = parentLink.nextElementSibling;
-//   const okcHistory = firstEmail.cloneNode(true);
+// if current page is emails page,
+else if (currentURL.pathname == '/emails/') {
+  // store first row, clone new row from second row
+  const parentLink = document.querySelector('tr').nextElementSibling;
+  const firstEmail = parentLink.nextElementSibling;
+  const okcHistory = firstEmail.cloneNode(true);
 
-//   // store link and link column from cloned row
-//   const okcLink = okcHistory.querySelector('a');
-//   const okcColumn = okcLink.parentElement;
+  // store link and link column from cloned row
+  const okcLink = okcHistory.querySelector('a');
+  const okcColumn = okcLink.parentElement;
 
-//   // make cloned row taller
-//   okcHistory.setAttribute('style', 'height:3em');
-//   // align column to the top
-//   okcColumn.setAttribute('valign', 'top');
-//   // change the link address
-//   okcLink.setAttribute('href', '/emails/00.html');
-//   // change the link text
-//   okcLink.innerText = 'OkCupid Messages';
+  // make cloned row taller
+  okcHistory.setAttribute('style', 'height:3em');
+  // align column to the top
+  okcColumn.setAttribute('valign', 'top');
+  // change the link address
+  okcLink.setAttribute('href', '/emails/00.html');
+  // change the link text
+  okcLink.innerText = 'OkCupid Messages';
 
-//   // add cloned row to the page after the first row
-//   parentLink.insertAdjacentElement('afterend', okcHistory);
-// }
+  // add cloned row to the page after the first row
+  parentLink.insertAdjacentElement('afterend', okcHistory);
+}
 
 // if current URL is in the emails folder and then followed by a non-zero number,
 else if (currentURL.pathname.match(/^\/emails\/(?!00)\d+/)) {
