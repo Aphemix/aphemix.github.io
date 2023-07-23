@@ -28,6 +28,8 @@ if (currentURL.pathname == '/chats/') {
 else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
   // store true or false based on whether the current URL includes a hash
   let hasHash = !!currentURL.hash;
+  // set a place aside for a currently linked hash to be discovered later
+  let currentBookmark;
 
   // define Gmail format to link format date conversion function
   const toDateAnchor = (() => {
@@ -98,8 +100,8 @@ else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
 
     // if there is presently a hash in the URL matching the present item's date,
     if ((hasHash) && (currentURL.hash.endsWith(dateAnchor))) {
-      // scroll to that date,
-      bookmarkLink.scrollIntoView();
+      // store the link to be bookmarked after all further page modifications are done,
+      currentBookmark = bookmarkLink;
       // and stop checking for further hashes
       hasHash = false;
     }
@@ -199,4 +201,7 @@ else if (currentURL.pathname.match(/^\/emails\/\d+/)) {
   // controlBar.append(controlText);
 
   // document.body.insertAdjacentElement('afterbegin', controlBar);
+
+  // if there is an active bookmark in the URL, jump to it
+  (currentBookmark) && (currentBookmark.scrollIntoView());
 }
