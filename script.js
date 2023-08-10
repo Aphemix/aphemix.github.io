@@ -3,20 +3,20 @@ const currentURL = new URL(window.location.href);
 
 // if current page is chats page,
 if (currentURL.pathname == '/chats/') {
-  // derive the last chat link on the page
-  const lastLink = Array
+  // derive the x titled chat link on the page
+  const xTitle = Array
     // starting from a list of every chat link found on the page,
     .from(document.querySelectorAll('a.title'))
-    // then isolating the one containing the last chat's name
+    // then isolating the one containing x for a name
     .find(link => link.innerText == 'x');
 
-  // if last chat link is found and not empty, change its given text to custom text
-  (lastLink) && (lastLink.innerText = 'Ride Off Into The Sunset / Directly Into The Future');
+  // if x titled link is found and not empty, change its given text to custom text
+  (xTitle) && (xTitle.innerText = 'Ride Off Into The Sunset / Directly Into The Future');
 
   // initialize counter to 1,
   let dateCount = 1;
-  // for each date among a list of every date found on the page,
-  for (const currentDate of document.querySelectorAll('td.date')) {
+  // for each date among a list of every date found on the page, starting from the end,
+  for (const currentDate of Array.from(document.querySelectorAll('td.date')).reverse()) {
     // change the text so that it is preceded by the current count, padded to a length of two digits
     currentDate.innerText = `[${(dateCount + '').padStart(2, 0)}] ${currentDate.innerText}`;
     // increment the count to the next number up
