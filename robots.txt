@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /emails/
+Disallow: /emails/*
