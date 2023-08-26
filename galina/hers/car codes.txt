@@ -1,0 +1,4 @@
+ 2  	Rear Heated Oxygen Sensor. 
+ 12  	Exhaust Gas Recirculation (EGR) System. 
+ 41  	Oxygen sensor heater.
+ 43  	Fuel supply system
