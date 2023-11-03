@@ -225,7 +225,7 @@ document.querySelectorAll('a').forEach(function(link) {
   if (link.getAttribute('target') === '_blank') {
     link.addEventListener('click', function(e) {
       const linkURL = new URL(link.href);
-      track(linkURL.href.replace(linkURL.origin, ''));
+      track(linkURL.href.replace(currentURL.origin, ''));
     });
   }
 });
