@@ -222,8 +222,10 @@ track(currentURL.href.replace(currentURL.origin, ''));
 
 // add listeners to track each link on click
 document.querySelectorAll('a').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    const linkURL = new URL(link.href);
-    track(linkURL.href.replace(linkURL.origin, ''));
-  });
+  if (link.getAttribute('target') === '_blank') {
+    link.addEventListener('click', function(e) {
+      const linkURL = new URL(link.href);
+      track(linkURL.href.replace(linkURL.origin, ''));
+    });
+  }
 });
