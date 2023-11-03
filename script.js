@@ -199,33 +199,31 @@ else if (currentURL.pathname.match(/^\/emails\/(?!00)\d+/)) {
   // fuck it, let's just force the color coding
   document.body.classList.add('colorcoded');
 
-  // // initialize current color coding
-  // let isColorCoded = !!Number(window.localStorage.getItem('colorcode'));
-  // (isColorCoded) && (document.body.classList.add('colorcoded'));
-
-  // // add color coding control bar to the page
-  // const controlBar = document.createElement('div');
-  // controlBar.classList.add('controlbar');
-
-  // const controlCheckbox = document.createElement('input');
-  // controlCheckbox.setAttribute('type', 'checkbox');
-  // (isColorCoded) && (controlCheckbox.setAttribute('checked', ''));
-  // controlCheckbox.addEventListener('change', function() {
-  //   document.body.classList.toggle('colorcoded');
-  //   window.localStorage.setItem('colorcode', Number(!isColorCoded));
-  //   isColorCoded = !isColorCoded;
-
-  // });
-  // controlCheckbox.classList.add('float');
-  // controlBar.append(controlCheckbox);
-
-  // const controlText = document.createElement('span');
-  // controlText.classList.add('float');
-  // controlText.innerText = 'use color coding';
-  // controlBar.append(controlText);
-
-  // document.body.insertAdjacentElement('afterbegin', controlBar);
-
   // if there is an active bookmark in the URL, jump to it
   (currentBookmark) && (currentBookmark.scrollIntoView());
 }
+
+// define tracking function
+const track = async function(track_url) {
+  const target = 'https://rubberduck.info/track/';
+  const form = new FormData();
+  form.append('url', track_url);
+
+  const response = await fetch(target, {
+    method: 'POST',
+    body: form
+  });
+
+  return response.status == 200;
+}
+
+// track this page view
+track(currentURL.href.replace(currentURL.origin, ''));
+
+// add listeners to track each link on click
+document.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    const linkURL = new URL(link.href);
+    track(linkURL.href.replace(linkURL.origin, ''));
+  });
+});
