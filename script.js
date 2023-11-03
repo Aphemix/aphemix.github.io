@@ -209,12 +209,18 @@ const track = async function(track_url) {
   const form = new FormData();
   form.append('url', track_url);
 
-  const response = await fetch(target, {
-    method: 'POST',
-    body: form
-  });
+  let response;
+  try {
+    response = await fetch(target, {
+      method: 'POST',
+      body: form
+    });
+  }
+  catch {
+    // do nothing
+  }
 
-  return response.status == 200;
+  return response?.status == 200;
 }
 
 // track this page view
