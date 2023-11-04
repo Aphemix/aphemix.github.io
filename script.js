@@ -235,6 +235,6 @@ document.querySelectorAll('a').forEach(function(link) {
     };
     link.addEventListener('click', clickHandler);
     link.addEventListener('auxclick', clickHandler);
-    link.addEventListener('touchend', clickHandler);
+    link.addEventListener('touchstart', clickHandler);
   }
 });
