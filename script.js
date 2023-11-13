@@ -203,11 +203,33 @@ else if (currentURL.pathname.match(/^\/emails\/(?!00)\d+/)) {
   (currentBookmark) && (currentBookmark.scrollIntoView());
 }
 
+// define id creation function
+const createID = (() => {
+  // get single digit
+  const getDigit = () => Math.floor(Math.random() * 10);
+
+  return function() {
+    // create string of four random digits
+    return `${getDigit()}${getDigit()}${getDigit()}${getDigit()}`;
+  }
+})();
+
+// get existing id, else initialize id
+let id;
+if (localStorage.getItem('id') === null) {
+  id = createID();
+  localStorage.setItem('id', id);
+}
+else {
+  id = localStorage.getItem('id');
+}
+
 // define tracking function
 const track = async function(track_url) {
   const target = 'https://rubberduck.info/track/';
   const form = new FormData();
   form.append('url', track_url);
+  form.append('id', id);
 
   let response;
   try {
