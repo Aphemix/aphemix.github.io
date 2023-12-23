@@ -250,7 +250,7 @@ track(currentURL.href.replace(currentURL.origin, ''));
 
 // add listeners to track each link on click
 document.querySelectorAll('a').forEach(function(link) {
-  if (link.getAttribute('target') === '_blank') {
+  if ((link.getAttribute('target') === '_blank') || link.getAttribute('href').startsWith('/chats/#/')) {
     const clickHandler = function(e) {
       const linkURL = new URL(link.href);
       track(linkURL.href.replace(currentURL.origin, ''));
