@@ -30,7 +30,8 @@ if (currentURL.pathname == '/chats/') {
     if (linkText.startsWith('Youtube Link >')) {
       const replacementSpan = document.createElement('span');
       replacementSpan.innerText = linkText;
-      replacementSpan.setAttribute('style', 'text-decoration:strikethrough');
+      replacementSpan.classList.addClass('note');
+      replacementSpan.setAttribute('style', 'text-decoration:line-through;');
 
       currentLink.insertAdjacentElement('beforebegin', replacementSpan);
       currentLink.remove();
