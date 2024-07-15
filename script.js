@@ -31,7 +31,6 @@ if (currentURL.pathname == '/chats/') {
       const replacementSpan = document.createElement('span');
       replacementSpan.innerText = linkText;
       replacementSpan.classList.add('note');
-      replacementSpan.setAttribute('style', 'text-decoration:line-through;');
 
       currentLink.insertAdjacentElement('beforebegin', replacementSpan);
       currentLink.remove();
