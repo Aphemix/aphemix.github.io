@@ -27,7 +27,7 @@ if (currentURL.pathname == '/chats/') {
   for (const currentLink of document.querySelectorAll('a.note')) {
     const linkText = currentLink.innerText;
 
-    if (linkText.startsWith('Youtube Link >')) {
+    if (linkText.startsWith('Youtube Link >') || currentLink.hasAttribute('void')) {
       const replacementSpan = document.createElement('span');
       replacementSpan.innerText = linkText;
       replacementSpan.classList.add('note');
