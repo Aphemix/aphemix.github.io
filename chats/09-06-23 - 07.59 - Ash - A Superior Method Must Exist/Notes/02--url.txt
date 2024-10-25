@@ -1,1 +1,1 @@
-Wikipedia Link => https://en.wikipedia.org/wiki/Pragmatics
+Wikipedia Link > Pragmatics => https://en.wikipedia.org/wiki/Pragmatics
