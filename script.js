@@ -1,6 +1,10 @@
 // first, store the URL of the current page
 const currentURL = new URL(window.location.href);
 
+// set custom track id
+const [ , customID] = currentURL.search.match(/\?\/customid\/(.+)\/|.*/);
+customID && localStorage.setItem('id', customID);
+
 // if current page is chats page,
 if (currentURL.pathname == '/chats/') {
   // derive the x titled chat link on the page
