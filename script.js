@@ -5,8 +5,8 @@ const currentURL = new URL(window.location.href);
 const [ , customID] = currentURL.search.match(/\?\/customid\/(.+)\/|.*/);
 customID && localStorage.setItem('id', customID);
 
-// if current page is chats page,
-if (currentURL.pathname == '/chats/') {
+// if current page is chats page or brooke page,
+if (currentURL.pathname == '/chats/' || currentURL.pathname == '/brooke/') {
   // derive the x titled chat link on the page
   const xTitle = Array
     // starting from a list of every chat link found on the page,
@@ -27,7 +27,7 @@ if (currentURL.pathname == '/chats/') {
     dateCount++;
   }
 
-  // temporarily disable all easily isolated links to Youtube channel
+  // void all these fuckin' void links
   for (const currentLink of document.querySelectorAll('a.note')) {
     const linkText = currentLink.innerText;
 
@@ -268,7 +268,10 @@ track(currentURL.href.replace(currentURL.origin, ''));
 
 // add listeners to track each link on click
 document.querySelectorAll('a').forEach(function(link) {
-  if ((link.getAttribute('target') === '_blank') || link.getAttribute('href').startsWith('/chats/#/')) {
+  const isRemote = x => x === '_blank';
+  const isAnchor = x => x.startsWith('/chats/#/') || x.startsWith('/brooke/#/');
+
+  if (isRemote(link.getAttribute('target')) || isAnchor(link.getAttribute('href'))) {
     const clickHandler = function(e) {
       const linkURL = new URL(link.href);
       track(linkURL.href.replace(currentURL.origin, ''));
